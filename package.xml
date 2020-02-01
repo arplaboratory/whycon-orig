@@ -39,8 +39,8 @@
   <run_depend>geometry_msgs</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>cv_bridge</run_depend>
-  <run_depend>libsdl1.2</run_depend>
-  <run_depend>libsdl-ttf2.0</run_depend>
+  <!--run_depend>libsdl1.2</run_depend>
+  <run_depend>libsdl-ttf2.0</run_depend-->
   <run_depend>libncurses5</run_depend>
 
   <export>

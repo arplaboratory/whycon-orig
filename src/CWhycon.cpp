@@ -88,7 +88,7 @@ void CWhycon::autocalibration(){
 }
 
 /*process events coming from GUI*/
-void CWhycon::processKeys(){
+/*void CWhycon::processKeys(){
     //process mouse - mainly for manual calibration - by clicking four circles at the corners of the operational area 
     while (SDL_PollEvent(&event)){
         if (event.type == SDL_MOUSEBUTTONDOWN){
@@ -153,7 +153,7 @@ void CWhycon::processKeys(){
 
     //store the key states
     memcpy(lastKeys,keys,keyNumber);
-}
+}*/
 
 void CWhycon::cameraInfoCallback(const sensor_msgs::CameraInfoConstPtr& msg){
     if(msg->K[0] == 0){
@@ -188,7 +188,7 @@ void CWhycon::imageCallback(const sensor_msgs::ImageConstPtr& msg){
         ROS_INFO("Readjusting image format from %ix%i %ibpp, to %ix%i %ibpp.",
                 image->width, image->height, image->bpp, msg->width, msg->height, msg->step/msg->width);
         image = new CRawImage(msg->width,msg->height,msg->step/msg->width);
-        if(useGui){
+        /*if(useGui){
             while(image->height/guiScale > screenHeight || image->height/guiScale > screenWidth) guiScale = guiScale*2;
             if(gui == NULL){
                 gui = new CGui(msg->width, msg->height, guiScale, fontPath.c_str());
@@ -196,7 +196,7 @@ void CWhycon::imageCallback(const sensor_msgs::ImageConstPtr& msg){
                 delete gui;
                 gui = new CGui(msg->width, msg->height, guiScale, fontPath.c_str());
             }
-        }
+        }*/
     }
 
     memcpy(image->data,(void*)&msg->data[0],msg->step*msg->height);
@@ -331,15 +331,15 @@ void CWhycon::imageCallback(const sensor_msgs::ImageConstPtr& msg){
     if(markerArray.markers.size() > 0) markers_pub.publish(markerArray);
 
     //draw stuff on the GUI 
-    if (useGui){
-        gui->drawImage(image);
-        gui->drawTimeStats(evalTime,numMarkers);
-        gui->displayHelp(displayHelp);
-        gui->guideCalibration(calibNum,fieldLength,fieldWidth);
-    }
-    for (int i = 0;i<numMarkers && useGui && drawCoords;i++){
-        if (currentSegmentArray[i].valid) gui->drawStats(currentSegmentArray[i].minx-30,currentSegmentArray[i].maxy,objectArray[i],trans->transformType == TRANSFORM_2D);
-    }
+   //if (useGui){
+   //    gui->drawImage(image);
+   //    gui->drawTimeStats(evalTime,numMarkers);
+   //    gui->displayHelp(displayHelp);
+   //    gui->guideCalibration(calibNum,fieldLength,fieldWidth);
+   //}
+   //for (int i = 0;i<numMarkers && useGui && drawCoords;i++){
+   //    if (currentSegmentArray[i].valid) gui->drawStats(currentSegmentArray[i].minx-30,currentSegmentArray[i].maxy,objectArray[i],trans->transformType == TRANSFORM_2D);
+   //}
 
     //establishing the coordinate system by manual or autocalibration
     if (autocalibrate && numFound == numMarkers) autocalibration();
@@ -351,8 +351,8 @@ void CWhycon::imageCallback(const sensor_msgs::ImageConstPtr& msg){
     }*/
 
     //gui->saveScreen(runs);
-    if (useGui) gui->update();
-    if (useGui) processKeys();
+    //if (useGui) gui->update();
+    //if (useGui) processKeys();
 }
 
 // dynamic parameter reconfiguration
@@ -388,7 +388,7 @@ CWhycon::~CWhycon(){
     free(lastSegmentArray);
 
     delete image;
-    if (useGui) delete gui;
+    //if (useGui) delete gui;
     for (int i = 0;i<maxMarkers;i++) delete detectorArray[i];
     free(detectorArray);
     delete trans;
@@ -423,10 +423,10 @@ void CWhycon::init(char *fPath, char *calPath){
     lastSegmentArray = (SSegment*) malloc(maxMarkers * sizeof(SSegment));
 
     // determine gui size so that it fits the screen
-    while (imageHeight/guiScale > screenHeight || imageHeight/guiScale > screenWidth) guiScale = guiScale*2;
+    //while (imageHeight/guiScale > screenHeight || imageHeight/guiScale > screenWidth) guiScale = guiScale*2;
 
     // initialize GUI, image structures, coordinate transformation modules
-    if (useGui) gui = new CGui(imageWidth,imageHeight,guiScale, fontPath.c_str());
+    //if (useGui) gui = new CGui(imageWidth,imageHeight,guiScale, fontPath.c_str());
     trans = new CTransformation(imageWidth,imageHeight,circleDiameter, calibDefPath.c_str());
     trans->transformType = TRANSFORM_NONE;		//in our case, 2D is the default
 

@@ -8,10 +8,10 @@
 #include <string>
 #include <cmath>
 #include <opencv2/opencv.hpp>
-#include <SDL/SDL.h>
+//#include <SDL/SDL.h>
 
 // WhyCon libs
-#include "CGui.h"
+//#include "CGui.h"
 #include "CTimer.h"
 #include "CCircleDetect.h"
 #include "CTransformation.h"
@@ -71,13 +71,13 @@ class CWhycon {
     private:
 
         // GUI-related stuff
-        CGui* gui;                 // drawing, events capture
+        //CGui* gui;                 // drawing, events capture
         bool useGui = true;        // use graphic interface at all?
         int guiScale = 1;          // in case camera resolution exceeds screen one, gui is scaled down
-        SDL_Event event;           // store mouse and keyboard events
+        //SDL_Event event;           // store mouse and keyboard events
         int keyNumber = 10000;     // number of keys pressed in the last step       
-        Uint8 lastKeys[1000];      // keys pressed in the previous step
-        Uint8 *keys = NULL;        // pressed keys
+        //Uint8 lastKeys[1000];      // keys pressed in the previous step
+        //Uint8 *keys = NULL;        // pressed keys
         bool displayHelp = false;  // displays some usage hints
         bool drawCoords = true;    // draws coordinatess at the robot's positions
         int runs = 0;              // number of gui updates/detections performed 

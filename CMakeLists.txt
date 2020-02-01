@@ -72,7 +72,7 @@ add_library(whycon_timer src/CTimer.cpp)
 add_library(whycon_sysmath src/sysmat.cpp)
 add_library(whycon_transform src/CTransformation.cpp)
 add_library(whycon_necklace src/CNecklace.cpp)
-add_library(whycon_gui src/CGui.cpp)
+#add_library(whycon_gui src/CGui.cpp)
 
 target_link_libraries(whycon_detector whycon_image)
 
@@ -88,12 +88,12 @@ target_link_libraries(whycon_necklace
     whycon_image
     )
 
-target_link_libraries(whycon_gui
-    whycon_image
-    whycon_transform
-    SDL
-    SDL_ttf
-    )
+#target_link_libraries(whycon_gui
+#    whycon_image
+#    whycon_transform
+#    SDL
+#    SDL_ttf
+#    )
 
 add_executable(whycon_ros src/CWhycon.cpp)
 
@@ -108,9 +108,9 @@ target_link_libraries(whycon_ros
     whycon_image
     whycon_detector
     whycon_transform
-    whycon_gui
+    #whycon_gui
     whycon_necklace
-    SDL
+    #SDL
     ${catkin_LIBRARIES}
     ${OpenCV_LIBRARIES}
     )
@@ -126,7 +126,7 @@ install(TARGETS
     whycon_sysmath
     whycon_transform
     whycon_necklace
-    whycon_gui
+#    whycon_gui
     whycon_ros
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
