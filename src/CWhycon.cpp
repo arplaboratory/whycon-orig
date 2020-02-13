@@ -412,6 +412,7 @@ void CWhycon::init(char *fPath, char *calPath){
     n->param("idSamples", idSamples, 360);
     n->param("hammingDist", hammingDist, 1);
     n->param("maxMarkers", maxMarkers, 50);
+    n->param("circleDiameter", circleDiameter, float(6.6));
 
     moveOne = moveVal;
     moveOne  = 0;

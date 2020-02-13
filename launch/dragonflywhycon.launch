@@ -10,7 +10,7 @@
     <arg name="idSamples" default="360" doc="Number of samples to detect ID"/>
     <arg name="hammingDist" default="1" doc="Hamming distance used for ID"/>
     <arg name="maxPatterns" default="50" doc="Maximum possible amount of patterns to be tracked"/>
-
+    <arg name="circleDiameter" default="6.6" doc="Circle Diameter"/>
     <arg name="useGui" default="false" doc="Whether to use GUI"/>
 
     <arg name="fontPath" value="$(find whycon_ros)/etc/font.ttf"/>
@@ -19,14 +19,14 @@
     <node pkg="whycon_ros" type="whycon_ros" name="whycon_ros" output="screen" args="$(arg fontPath) $(arg calibDefPath)" launch-prefix="">
         
 	<remap from="/camera/camera_info" to="$(arg camInfo)"/>
-        <remap from="/camera/image_raw" to="$(arg camRaw)"/>
+    <remap from="/camera/image_raw" to="$(arg camRaw)"/>
 	
 	<param name="useGui" value="$(arg useGui)"/>
 	<param name="idBits" value="$(arg idBits)"/>
 	<param name="idSamples" value="$(arg idSamples)"/>
-        <param name="hammingDist" value="$(arg hammingDist)"/>
-        <param name="maxPatterns" value="$(arg maxPatterns)"/>
-        
+    <param name="hammingDist" value="$(arg hammingDist)"/>
+    <param name="maxPatterns" value="$(arg maxPatterns)"/>
+    <param name="circleDiameter" value="$(arg circleDiameter)"/>
     </node>
 
     <include file="$(find snap_cam_ros)/launch/hires.launch">
